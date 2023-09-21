@@ -1,8 +1,11 @@
 const image_div = document.getElementsByClassName("image");
-let sourceImageId = null;
 
 function dragstart(event) {
-    sourceImageId = event.target.id;
+    const event_id = event.target.id;
+    const prev_img = event.target;
+    console.log(prev_img)
+    event.dataTransfer.setData("pre_img", prev_img);
+    event.dataTransfer.setData("id", event_id);
 }
 
 for (let i = 0; i < image_div.length; i++) {
@@ -18,16 +21,13 @@ for (let i = 0; i < image_div.length; i++) {
 }
 
 function drop(event) {
-    event.preventDefault();
-    const targetImage = event.target;
-    const targetImageId = targetImage.id;
-
+    const drag_image = event.target;
+    const prev_image = event.dataTransfer.getData("pre_img");
+    console.log(prev_image)
+    drag_image.id = event.dataTransfer.getData("id");
+     
+  
     
-    event.target.id = sourceImageId;
-    document.getElementById(sourceImageId).id = targetImageId;
-
-    
-    sourceImageId = null;
 }
 
 for (let i = 0; i < image_div.length; i++) {
