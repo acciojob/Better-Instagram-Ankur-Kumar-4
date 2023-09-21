@@ -2,9 +2,7 @@ const image_div = document.getElementsByClassName("image");
 
 function dragstart(event) {
     const event_id = event.target.id;
-    const prev_img = event.target;
-    console.log(prev_img)
-    event.dataTransfer.setData("pre_img", prev_img);
+    
     event.dataTransfer.setData("id", event_id);
 }
 
@@ -21,15 +19,34 @@ for (let i = 0; i < image_div.length; i++) {
 }
 
 function drop(event) {
-    const drag_image = event.target;
-    const prev_image = event.dataTransfer.getData("pre_img");
-    console.log(prev_image)
-    drag_image.id = event.dataTransfer.getData("id");
-     
   
-    
+    let target = event.target.id;//div2
+    let source =  event.dataTransfer.getData("id");//div1
+      
+    let target_el = document.getElementById(target);
+    console.log(target_el)
+  
+    let source_el = document.getElementById(source);
+    console.log(source_el)
+  
+	  let tem = target; 
+    target_el.id = source; 
+    source_el.id = tem;   
+     
+   
 }
 
 for (let i = 0; i < image_div.length; i++) {
     image_div[i].addEventListener("drop", drop);
 }
+
+
+
+
+
+
+
+
+
+
+
